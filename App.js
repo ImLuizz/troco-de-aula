@@ -3,10 +3,12 @@ import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import NewExpenseScreen from './screens/NewExpenseScreen';
 
 const Tabs = createBottomTabNavigator();
 const green = '#124D40';
 const gold = '#FFD065';
+const tabIcons = { Semana: 'time-outline', 'Novo gasto': 'add-circle-outline', Histórico: 'calendar-outline' };
 
 function WeekScreen() {
   return (
@@ -39,10 +41,11 @@ export default function App() {
         tabBarActiveTintColor: gold,
         tabBarInactiveTintColor: '#D6E4DF',
         tabBarIcon: ({ color, size }) => (
-          <Ionicons name={route.name === 'Semana' ? 'time-outline' : 'calendar-outline'} size={size} color={color} />
+          <Ionicons name={tabIcons[route.name]} size={size} color={color} />
         ),
       })}>
         <Tabs.Screen name="Semana" component={WeekScreen} options={{ title: 'Troco de Aula', tabBarLabel: 'Semana' }} />
+        <Tabs.Screen name="Novo gasto" component={NewExpenseScreen} />
         <Tabs.Screen name="Histórico" component={HistoryScreen} />
       </Tabs.Navigator>
     </NavigationContainer>
